@@ -9,10 +9,14 @@ dist/
 build/
 *.tsbuildinfo
 
-# Environment variables
+# Environment variables & Credentials
 .env
 .env.local
 .env.*.local
+.env.production
+.env.development
+backend/config/db.js
+backend/config/db.*.js
 
 # IDE
 .vscode/
@@ -38,10 +42,12 @@ pids/
 *.db
 *.sqlite
 *.sqlite3
+*.sql.bak
 
 # Uploads
 uploads/
 temp/
+backend/uploads/
 
 # OS files
 .DS_Store
@@ -51,5 +57,13 @@ Thumbs.db
 coverage/
 .nyc_output/
 
-# MySQL
-*.sql.bak
+# Sensitive Documentation (keep locally only)
+LOGIN_CREDENTIALS.md
+PASSWORD_RESOLUTION_GUIDE.md
+CONNECTION_STATUS.md
+MYSQL_CONNECTION_HELP.md
+
+# Batch files with local paths
+*.bat
+*.ps1
+*.vbs
