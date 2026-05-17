@@ -1,0 +1,186 @@
+[
+  {
+    "u": "Admin User",
+    "ro": "admin"
+  },
+  {
+    "u": "Teacher One",
+    "ro": "teacher",
+    "d": {
+      "id": 1,
+      "user_id": 2,
+      "qualification": "MSc Math",
+      "specialization": "Mathematics",
+      "phone_number": "9876543210",
+      "address": "12,kandy road,colombo\n",
+      "managed_class_id": 7
+    }
+  },
+  {
+    "u": "Student One",
+    "ro": "student",
+    "d": {
+      "id": 1,
+      "user_id": 3,
+      "class_id": 7,
+      "admission_number": "001",
+      "dob": "2007-12-28T18:30:00.000Z",
+      "gender": "male",
+      "address": "123 School St,Matale."
+    }
+  },
+  {
+    "u": "Parent One",
+    "ro": "parent",
+    "d": {
+      "id": 1,
+      "user_id": 4,
+      "student_id": 5,
+      "phone_number": "5566778899"
+    }
+  },
+  {
+    "u": "Arumugam",
+    "ro": "principal",
+    "d": {
+      "id": 2,
+      "user_id": 6,
+      "experience_years": 4,
+      "contact_number": "1122334455"
+    }
+  },
+  {
+    "u": "Teacher1",
+    "ro": "teacher",
+    "d": {
+      "id": 3,
+      "user_id": 7,
+      "qualification": "Primary",
+      "specialization": "General",
+      "phone_number": "0771234567",
+      "address": "School Campus",
+      "managed_class_id": 7
+    }
+  },
+  {
+    "u": "Teacher1",
+    "ro": "teacher",
+    "d": {
+      "id": 4,
+      "user_id": 8,
+      "qualification": "B.Ed",
+      "specialization": "General",
+      "phone_number": "0771112222",
+      "address": "School Campus",
+      "managed_class_id": 7
+    }
+  },
+  {
+    "u": "Teacher1",
+    "ro": "teacher",
+    "d": {
+      "id": 5,
+      "user_id": 9,
+      "qualification": "B.Ed",
+      "specialization": "General",
+      "phone_number": "0771112222",
+      "address": "School Campus",
+      "managed_class_id": 7
+    }
+  },
+  {
+    "u": "Teacher2",
+    "ro": "teacher",
+    "d": {
+      "id": 6,
+      "user_id": 10,
+      "qualification": "B.Ed",
+      "specialization": "General",
+      "phone_number": "0771112222",
+      "address": "School Campus",
+      "managed_class_id": 7
+    }
+  },
+  {
+    "u": "Test Student",
+    "ro": "student",
+    "d": {
+      "id": 3,
+      "user_id": 12,
+      "class_id": 8,
+      "admission_number": "002",
+      "dob": "2007-10-09T18:30:00.000Z",
+      "gender": "male",
+      "address": "123,Kandy road,Matale."
+    }
+  },
+  {
+    "u": "harish",
+    "ro": "student"
+  },
+  {
+    "u": "Sarujan",
+    "ro": "student",
+    "d": {
+      "id": 5,
+      "user_id": 14,
+      "class_id": 9,
+      "admission_number": "003",
+      "dob": "2001-10-08T18:00:00.000Z",
+      "gender": "male",
+      "address": "12,scl road, Matale.\n"
+    }
+  },
+  {
+    "u": "Harish",
+    "ro": "teacher",
+    "d": {
+      "id": 2,
+      "user_id": 15,
+      "qualification": "Primary",
+      "specialization": "Tamil",
+      "phone_number": "94774288168",
+      "address": "No.34,Godapola road,Matale.",
+      "managed_class_id": 11
+    }
+  },
+  {
+    "u": "John ",
+    "ro": "student",
+    "d": {
+      "id": 6,
+      "user_id": 16,
+      "class_id": 11,
+      "admission_number": "004",
+      "dob": "2009-12-10T18:30:00.000Z",
+      "gender": "male",
+      "address": "No.12,G road,Kandy"
+    }
+  },
+  {
+    "u": "Student2",
+    "ro": "student",
+    "d": {
+      "id": 7,
+      "user_id": 17,
+      "class_id": 11,
+      "admission_number": "005",
+      "dob": "2006-11-10T18:30:00.000Z",
+      "gender": "male",
+      "address": "hhhhhhhhhhhh"
+    }
+  },
+  {
+    "u": "Stu3",
+    "ro": "student",
+    "d": {
+      "id": 8,
+      "user_id": 18,
+      "class_id": 11,
+      "admission_number": "006",
+      "dob": "2009-12-11T18:30:00.000Z",
+      "gender": "male",
+      "address": "ggggg"
+    }
+  }
+]
