@@ -1,7 +1,7 @@
 // ... imports (kept partially, need to ensure all imports are present)
 import { useEffect, useState } from 'react';
 import { Plus, Megaphone, Trash2, Calendar, Clock, X, Paperclip, Download } from 'lucide-react';
-import { announcementService } from '../../../services/api';
+import { announcementService, getAssetUrl } from '../../../services/api';
 import { toast } from 'sonner';
 
 export const AdminAnnouncements = () => {
@@ -147,7 +147,7 @@ export const AdminAnnouncements = () => {
               {item.file_path && (
                 <div className="mb-4">
                   <a
-                    href={`http://localhost:3000${item.file_path}`}
+                    href={getAssetUrl(item.file_path)}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 text-sm text-blue-600 hover:text-blue-800 bg-blue-50 p-2 rounded-lg transition"

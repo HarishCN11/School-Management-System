@@ -10,7 +10,7 @@ import {
   X,
   PlusCircle
 } from 'lucide-react';
-import { announcementService } from '../../../services/api';
+import { announcementService, getAssetUrl } from '../../../services/api';
 import { toast } from 'sonner';
 
 export const PrincipalAnnouncements = ({ onNavigate }: any) => {
@@ -209,7 +209,7 @@ export const PrincipalAnnouncements = ({ onNavigate }: any) => {
                 <p className="text-gray-600 leading-relaxed font-medium">{ann.content}</p>
                 {ann.file_path && (
                   <a 
-                    href={`http://localhost:3000${ann.file_path}`} 
+                    href={getAssetUrl(ann.file_path)}
                     target="_blank" 
                     rel="noreferrer"
                     className="inline-flex items-center gap-2 text-blue-600 font-bold text-sm bg-blue-50 px-4 py-2 rounded-xl mt-2 hover:bg-blue-100 transition"

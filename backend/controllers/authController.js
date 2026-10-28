@@ -1,5 +1,5 @@
 const db = require('../config/db');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const sendEmail = require('../utils/emailService');
 
@@ -328,7 +328,7 @@ exports.updateProfile = async (req, res) => {
         // Handle Profile Photo
         if (req.file) {
             sql += ', profile_photo = ?';
-            params.push(`/uploads/profiles/${req.file.filename}`);
+            params.push(req.file.url || `/uploads/profiles/${req.file.filename}`);
         }
 
         sql += ' WHERE id = ?';
@@ -368,7 +368,7 @@ exports.updateProfile = async (req, res) => {
         console.log(`[PROFILE] Success: Profile updated for user ${userId}`);
         res.json({
             message: 'Profile updated successfully',
-            profile_photo: req.file ? `/uploads/profiles/${req.file.filename}` : user.profile_photo
+            profile_photo: req.file ? (req.file.url || `/uploads/profiles/${req.file.filename}`) : user.profile_photo
         });
     } catch (error) {
         console.error('Update Profile Error:', error);

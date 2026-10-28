@@ -39,7 +39,7 @@ exports.submitAssignment = async (req, res) => {
     }
 
     try {
-        const filePath = `/uploads/${file.filename}`;
+        const filePath = file.url || `/uploads/${file.filename}`;
         await db.query(
             'INSERT INTO submissions (assignment_id, student_id, file_path) VALUES (?, ?, ?)',
             [assignment_id, student_id, filePath]
@@ -55,7 +55,7 @@ exports.submitAssignment = async (req, res) => {
 exports.createAssignment = async (req, res) => {
     const { title, description, class_id, subject_id, due_date } = req.body;
     const file = req.file;
-    const filePath = file ? `/uploads/${file.filename}` : null;
+    const filePath = file ? (file.url || `/uploads/${file.filename}`) : null;
 
     try {
         // Find teacher_id from user_id (req.user.id)

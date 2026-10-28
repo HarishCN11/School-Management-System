@@ -30,7 +30,7 @@ exports.getAllAnnouncements = async (req, res) => {
 exports.createAnnouncement = async (req, res) => {
     const { title, content, target_role, class_id, display_until } = req.body;
     const posted_by = req.user ? req.user.id : null;
-    const file_path = req.file ? `/uploads/${req.file.filename}` : null;
+    const file_path = req.file ? (req.file.url || `/uploads/${req.file.filename}`) : null;
 
     try {
         const [result] = await pool.query(

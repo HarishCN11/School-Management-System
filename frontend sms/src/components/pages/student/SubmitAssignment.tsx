@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { assignmentService } from '../../../services/api';
+import { assignmentService, getAssetUrl } from '../../../services/api';
 import { toast } from 'sonner';
 import { Upload, File, X, ArrowLeft } from 'lucide-react';
 
@@ -99,7 +99,7 @@ export const SubmitAssignment = ({ onNavigate, data }: any) => {
                 </div>
               </div>
               <a
-                href={`http://localhost:3000${assignment.file_path}`}
+                href={getAssetUrl(assignment.file_path)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 rounded-lg bg-blue-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-blue-700 transition-colors"

@@ -40,7 +40,7 @@ exports.uploadMaterial = async (req, res) => {
             teacher_id = teacher[0].id;
         }
 
-        const filePath = `/uploads/${file.filename}`;
+        const filePath = file.url || `/uploads/${file.filename}`;
         await db.query(
             'INSERT INTO study_materials (title, description, class_id, subject_id, teacher_id, file_path) VALUES (?, ?, ?, ?, ?, ?)',
             [title, description, class_id, subject_id, teacher_id, filePath]
@@ -83,4 +83,3 @@ exports.getMaterialsByClass = async (req, res) => {
         res.status(500).json({ message: 'Server error' });
     }
 };
-
