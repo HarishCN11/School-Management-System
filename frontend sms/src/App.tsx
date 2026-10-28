@@ -198,9 +198,9 @@ export default function App() {
     if (currentPage === 'admin-classes') return <ManageClasses onNavigate={handleNavigate} />;
     if (currentPage === 'admin-inventory') return <ManageInventory onNavigate={handleNavigate} />;
     if (currentPage === 'admin-inventory-form') return <InventoryForm onNavigate={handleNavigate} data={pageData} />;
-    if (currentPage === 'admin-announcements') return <AdminAnnouncements onNavigate={handleNavigate} />;
+    if (currentPage === 'admin-announcements') return <AdminAnnouncements />;
     if (currentPage === 'admin-audit') return <AuditLog onNavigate={handleNavigate} />;
-    if (currentPage === 'admin-reports') return <AdminReports onNavigate={handleNavigate} />;
+    if (currentPage === 'admin-reports') return <AdminReports />;
     if (currentPage === 'admin-user-management') return <UserManagement onNavigate={handleNavigate} />;
 
     // Teacher Pages
@@ -208,7 +208,7 @@ export default function App() {
     if (currentPage === 'teacher-classes') return <TeacherClasses onNavigate={handleNavigate} />;
     if (currentPage === 'teacher-class-detail') return <ClassDetail onNavigate={handleNavigate} data={pageData} />;
     if (currentPage === 'teacher-materials') return <TeacherMaterials onNavigate={handleNavigate} />;
-    if (currentPage === 'teacher-instructions') return <TeacherInstructions onNavigate={handleNavigate} />;
+    if (currentPage === 'teacher-instructions') return <TeacherInstructions />;
     if (currentPage === 'teacher-instruction-form') return <InstructionForm onNavigate={handleNavigate} data={pageData} />;
     if (currentPage === 'teacher-submissions') return <TeacherSubmissions onNavigate={handleNavigate} />;
     if (currentPage === 'teacher-reports') return <TeacherReports onNavigate={handleNavigate} />;
@@ -224,7 +224,7 @@ export default function App() {
     if (currentPage === 'student-submit-assignment') return <SubmitAssignment onNavigate={handleNavigate} data={pageData} />;
     if (currentPage === 'student-announcements') return <StudentAnnouncements onNavigate={handleNavigate} />;
     if (currentPage === 'student-reports') return <StudentReports onNavigate={handleNavigate} data={pageData} />;
-    if (currentPage === 'student-feedback') return <StudentFeedback onNavigate={handleNavigate} />;
+    if (currentPage === 'student-feedback') return <StudentFeedback />;
     if (currentPage === 'student-submissions') return <StudentSubmissions onNavigate={handleNavigate} />;
 
     // Principal Pages
@@ -238,10 +238,10 @@ export default function App() {
     // Parent Pages
     if (currentPage === 'parent-dashboard') return <ParentDashboard onNavigate={handleNavigate} />;
     if (currentPage === 'parent-announcements') return <ParentAnnouncements onNavigate={handleNavigate} />;
-    if (currentPage === 'parent-reports') return <ParentReports onNavigate={handleNavigate} />;
+    if (currentPage === 'parent-reports') return <ParentReports />;
     if (currentPage === 'parent-communication') return <ParentCommunication onNavigate={handleNavigate} />;
     if (currentPage === 'parent-assignments') return <ParentAssignments onNavigate={handleNavigate} />;
-    if (currentPage === 'parent-child-progress') return <ParentReports onNavigate={handleNavigate} />;
+    if (currentPage === 'parent-child-progress') return <ParentReports />;
 
     // Shared Pages
     if (currentPage === 'profile') return <UserProfile userName={userName} userEmail={userEmail} userRole={userRole} onProfileUpdate={handleProfileUpdate} />;

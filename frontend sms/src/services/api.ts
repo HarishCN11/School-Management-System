@@ -386,7 +386,7 @@ export const reportService = {
         const response = await api.get(`/reports/official-marks/${studentId}`);
         return response.data;
     },
-    updateOfficialMarks: async (data: { student_id: number, marks: any[] }) => {
+    updateOfficialMarks: async (data: { student_id: number, marks: any[], academic_year: string }) => {
         const response = await api.post('/reports/official-update', data);
         return response.data;
     },

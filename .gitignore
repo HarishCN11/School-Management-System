@@ -7,6 +7,7 @@ yarn.lock
 # Build directories
 dist/
 build/
+.next/
 *.tsbuildinfo
 
 # Environment variables & Credentials
@@ -62,6 +63,7 @@ LOGIN_CREDENTIALS.md
 PASSWORD_RESOLUTION_GUIDE.md
 CONNECTION_STATUS.md
 MYSQL_CONNECTION_HELP.md
+SMS _Password and user names.txt
 
 # Batch files with local paths
 *.bat
