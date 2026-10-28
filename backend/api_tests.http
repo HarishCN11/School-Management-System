@@ -1,0 +1,121 @@
+@baseUrl = http://localhost:3000/api
+@authToken = {{login.response.body.token}}
+
+### 1. Health Check (Basic)
+GET http://localhost:3000/
+
+### 2. Register Admin
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+    "name": "Admin User",
+    "email": "admin@school.com",
+    "password": "password123",
+    "role": "admin"
+}
+
+### 3. Login
+# @name login
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+    "email": "admin@school.com",
+    "password": "password123"
+}
+
+### 4. Create Class (Requires Token)
+POST {{baseUrl}}/academic/classes
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+    "name": "Class 10-A",
+    "room_number": "101"
+}
+
+### 5. Create Subject
+POST {{baseUrl}}/academic/subjects
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+    "name": "Mathematics",
+    "code": "MATH101"
+}
+
+### 6. Create Student Profile
+# Note: In a real app, you'd probably register a user first, then create profile.
+# Assuming we have a user_id from somewhere or created one.
+POST {{baseUrl}}/students/profile
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+    "user_id": 3, 
+    "class_id": 1,
+    "dob": "2010-01-01",
+    "gender": "female",
+    "address": "123 School Lane"
+}
+
+### 7. Get All Students
+GET {{baseUrl}}/students
+Authorization: Bearer {{authToken}}
+
+### 8. Mark Attendance
+POST {{baseUrl}}/attendance
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+    "class_id": 1,
+    "date": "2023-10-27",
+    "attendance_data": [
+        { "student_id": 1, "status": "present" }
+    ]
+}
+
+### 9. View Attendance
+GET {{baseUrl}}/attendance/class/1/date/2023-10-27
+Authorization: Bearer {{authToken}}
+
+### 10. Schedule Exam
+POST {{baseUrl}}/exams
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+    "name": "Mid-Term Math",
+    "class_id": 1,
+    "subject_id": 1,
+    "exam_date": "2023-11-01",
+    "total_marks": 100
+}
+
+### 11. Record Results
+POST {{baseUrl}}/exams/results
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+    "exam_id": 1,
+    "results_data": [
+        { "student_id": 1, "marks_obtained": 85.5 }
+    ]
+}
+
+### 12. Add Schedule Item
+POST {{baseUrl}}/schedule
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+    "class_id": 1,
+    "subject_id": 1,
+    "teacher_id": 1,
+    "day_of_week": "Monday",
+    "start_time": "09:00",
+    "end_time": "10:00"
+}
