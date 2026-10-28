@@ -4,6 +4,7 @@ import {
   Heart, Home, BookOpen, Library, BarChart3, 
   Briefcase, Box, MessageSquare, LineChart, Mail, History 
 } from 'lucide-react';
+import { getAssetUrl } from '../services/api';
 
 export const Layout = ({ children, currentPage, navigationItems, userRole, userName, userPhoto, onNavigate, onLogout, notificationCount }: any) => {
   return (
@@ -99,7 +100,7 @@ export const Layout = ({ children, currentPage, navigationItems, userRole, userN
             >
               <div className="w-10 h-10 overflow-hidden rounded-xl shadow-lg shadow-blue-200/20 border-2 border-white group-hover:scale-105 transition-transform">
                 {userPhoto ? (
-                  <img src={`http://localhost:3000${userPhoto}`} alt="U" className="w-full h-full object-cover" />
+                  <img src={getAssetUrl(userPhoto)} alt="U" className="w-full h-full object-cover" />
                 ) : (
                   <div className="w-full h-full bg-gradient-to-tr from-blue-600 to-indigo-700 text-white flex items-center justify-center font-bold text-sm">
                     {userName.charAt(0)}

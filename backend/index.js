@@ -5,7 +5,7 @@ const db = require('./config/db');
 const path = require('path'); 
 
 // Configure environment variables
-dotenv.config();
+dotenv.config({ path: path.join(__dirname, '.env') });
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -71,8 +71,8 @@ app.get('/', (req, res) => {
   res.send('School Management Backend is running!');
 });
 
-// Health check route
-app.get('/health', async (req, res) => {
+// Health checks
+const healthCheck = async (req, res) => {
   try {
     const connection = await db.getConnection();
     await connection.release();
@@ -80,7 +80,10 @@ app.get('/health', async (req, res) => {
   } catch (error) {
     res.status(500).json({ status: 'unhealthy', database: 'disconnected', error: error.message });
   }
-});
+};
+
+app.get('/health', healthCheck);
+app.get('/api/health', healthCheck);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
@@ -88,19 +91,21 @@ app.use((err, req, res, next) => {
   res.status(500).json({ message: 'Internal server error', error: err.message });
 });
 
-// Start server
-const server = app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 
-  // Test database connection
-  db.getConnection()
-    .then(connection => {
-      connection.release();
-      console.log('✓ Database connection successful');
-    })
-    .catch(error => {
-      console.warn('⚠ Database connection failed:', error.message);
-      console.warn('Server is running but database features may not work.');
-      console.warn('Make sure MySQL is running and credentials in .env are correct.');
-    });
-});
+    db.getConnection()
+      .then(connection => {
+        connection.release();
+        console.log('✓ Database connection successful');
+      })
+      .catch(error => {
+        console.warn('⚠ Database connection failed:', error.message);
+        console.warn('Server is running but database features may not work.');
+        console.warn('Make sure MySQL is running and credentials in .env are correct.');
+      });
+  });
+}
+
+module.exports = app;

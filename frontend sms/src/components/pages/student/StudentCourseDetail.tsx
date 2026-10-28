@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { assignmentService, materialService } from '../../../services/api';
+import { assignmentService, materialService, getAssetUrl } from '../../../services/api';
 import { toast } from 'sonner';
 import {
     FileText,
@@ -150,7 +150,7 @@ export const StudentCourseDetail = ({ onNavigate, data }: any) => {
                                                             <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest mt-0.5">Reference Material</p>
                                                         </div>
                                                         <a
-                                                            href={`http://localhost:3000${assignment.file_path}`}
+                                                            href={getAssetUrl(assignment.file_path)}
                                                             target="_blank"
                                                             rel="noopener noreferrer"
                                                             className="p-2 bg-white text-blue-600 hover:bg-blue-600 hover:text-white rounded-lg shadow-sm transition-all"
@@ -231,7 +231,7 @@ export const StudentCourseDetail = ({ onNavigate, data }: any) => {
                                             <div className="flex items-center justify-between mb-2">
                                                 <h3 className="font-black text-gray-900 truncate">{material.title}</h3>
                                                 <a
-                                                    href={`http://localhost:3000${material.file_path}`}
+                                                    href={getAssetUrl(material.file_path)}
                                                     target="_blank"
                                                     rel="noreferrer"
                                                     className="p-2 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-all"

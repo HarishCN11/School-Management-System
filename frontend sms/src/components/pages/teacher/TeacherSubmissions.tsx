@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { assignmentService } from '../../../services/api';
+import { assignmentService, getAssetUrl } from '../../../services/api';
 import { toast } from 'sonner';
 import { Download, CheckCircle, Clock } from 'lucide-react';
 
@@ -72,7 +72,7 @@ export const TeacherSubmissions = ({ onNavigate }: any) => {
                   <td className="p-4 text-gray-500 text-sm">{new Date(sub.submitted_at).toLocaleDateString()}</td>
                   <td className="p-4">
                     <a
-                      href={`http://localhost:3000${sub.file_path}`}
+                      href={getAssetUrl(sub.file_path)}
                       target="_blank"
                       rel="noreferrer"
                       className="text-blue-600 hover:text-blue-800 flex items-center gap-1 text-sm font-medium"

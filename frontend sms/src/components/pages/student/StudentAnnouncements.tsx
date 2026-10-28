@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { announcementService } from '../../../services/api';
+import { announcementService, getAssetUrl } from '../../../services/api';
 import { Bell, Calendar, Paperclip, ChevronRight, FileText } from 'lucide-react';
 
 interface Announcement {
@@ -85,7 +85,7 @@ export const StudentAnnouncements = ({ onNavigate }: any) => {
                 {item.file_path && (
                   <div className="mt-4 inline-flex">
                     <a
-                      href={`http://localhost:3000${item.file_path}`}
+                      href={getAssetUrl(item.file_path)}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="group/btn flex items-center gap-2 rounded-xl bg-gray-50 px-4 py-2.5 text-sm font-medium text-gray-700 ring-1 ring-gray-200 transition-all hover:bg-blue-50 hover:text-blue-700 hover:ring-blue-200"

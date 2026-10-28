@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { materialService, academicService, teacherPortalService } from '../../../services/api';
+import { materialService, academicService, teacherPortalService, getAssetUrl } from '../../../services/api';
 import { toast } from 'sonner';
 import { Upload, CheckCircle, X, Plus, Trash2, FileText, Download } from 'lucide-react';
 
@@ -275,7 +275,7 @@ export const TeacherMaterials = ({ onNavigate }: any) => {
                                         {new Date(m.uploaded_at).toLocaleDateString()}
                                     </div>
                                     <a
-                                        href={`http://localhost:3000${m.file_path}`}
+                                        href={getAssetUrl(m.file_path)}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="p-2 bg-gray-900 text-white rounded-xl hover:bg-blue-600 transition shadow-lg shadow-gray-200"

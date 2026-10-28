@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react';
 import api, {
     assignmentService,
     materialService,
-    teacherPortalService
+    teacherPortalService,
+    getAssetUrl
 } from '../../../services/api';
 import { toast } from 'sonner';
 import {
@@ -320,7 +321,7 @@ export const TeacherSubjectPortal = ({ onNavigate, data }: any) => {
                                                     </div>
                                                     <div className="flex items-center justify-between gap-4 mt-4">
                                                         <a
-                                                            href={`http://localhost:3000${sub.file_path}`}
+                                                            href={getAssetUrl(sub.file_path)}
                                                             target="_blank"
                                                             rel="noreferrer"
                                                             className="flex items-center gap-2 text-[10px] font-bold text-blue-600 hover:underline"
@@ -432,7 +433,7 @@ export const TeacherSubjectPortal = ({ onNavigate, data }: any) => {
                                             </div>
                                         </div>
                                         <a
-                                            href={`http://localhost:3000${m.file_path}`}
+                                            href={getAssetUrl(m.file_path)}
                                             target="_blank"
                                             rel="noreferrer"
                                             className="h-12 w-12 flex items-center justify-center bg-gray-50 text-gray-400 rounded-2xl hover:bg-blue-600 hover:text-white transition-all shadow-sm"

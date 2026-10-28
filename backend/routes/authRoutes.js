@@ -2,20 +2,8 @@ const express = require('express');
 const router = express.Router();
 const authController = require('../controllers/authController');
 const verifyToken = require('../middleware/authMiddleware');
-
-const multer = require('multer');
-const path = require('path');
-
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, 'uploads/profiles/');
-    },
-    filename: (req, file, cb) => {
-        cb(null, Date.now() + path.extname(file.originalname));
-    }
-});
-
-const upload = multer({ storage: storage });
+const createUploadMiddleware = require('../middleware/uploadMiddleware');
+const uploadProfilePhoto = createUploadMiddleware('profile_photo', 'profiles');
 
 router.post('/register', authController.register);
 router.post('/login', authController.login);
@@ -26,7 +14,7 @@ router.post('/reset-password', authController.resetPasswordWithTemp);
 
 // Profile Management
 router.get('/profile', verifyToken, authController.getProfile);
-router.put('/profile', verifyToken, upload.single('profile_photo'), authController.updateProfile);
+router.put('/profile', verifyToken, uploadProfilePhoto, authController.updateProfile);
 router.post('/admin-reset-password', verifyToken, authController.adminResetUserPassword);
 router.delete('/:id', verifyToken, authController.deleteUser);
 

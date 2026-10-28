@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { assignmentService, academicService, teacherPortalService } from '../../../services/api';
+import { assignmentService, academicService, teacherPortalService, getAssetUrl } from '../../../services/api';
 import { toast } from 'sonner';
 import { Plus, X, BookOpen, Layers, Upload, Trash2, Clock, CheckCircle2, AlertCircle, Download } from 'lucide-react';
 
@@ -286,7 +286,7 @@ export const TeacherInstructions = () => {
 
                     <div className="flex gap-2">
                       {a.file_path && (
-                        <a href={`http://localhost:3000${a.file_path}`} target="_blank" rel="noreferrer" className="p-3 bg-gray-50 text-gray-600 rounded-xl hover:bg-gray-100 transition">
+                        <a href={getAssetUrl(a.file_path)} target="_blank" rel="noreferrer" className="p-3 bg-gray-50 text-gray-600 rounded-xl hover:bg-gray-100 transition">
                           <Download size={18} />
                         </a>
                       )}

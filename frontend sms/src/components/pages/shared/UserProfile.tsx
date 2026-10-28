@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { authService } from '../../../services/api';
+import { authService, getAssetUrl } from '../../../services/api';
 import { toast } from 'sonner';
 import {
   User, Lock, Save, Loader2, Mail, Camera,
@@ -49,7 +49,7 @@ export const UserProfile = ({ userName, userEmail, userRole, onProfileUpdate }: 
         experience_years: data.experience_years || ''
       }));
       if (data.profile_photo) {
-        setPhotoPreview(`http://localhost:3000${data.profile_photo}`);
+        setPhotoPreview(getAssetUrl(data.profile_photo));
       }
     } catch (err) {
       console.error(err);
