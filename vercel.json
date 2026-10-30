@@ -1,6 +1,6 @@
 {
   "functions": {
-    "api/[...path].js": {
+    "pages/api/[[...path]].js": {
       "maxDuration": 30
     }
   }
