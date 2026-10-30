@@ -27,7 +27,7 @@ app.use(async (req, res, next) => {
       console.error('CRITICAL: Database connection failed during request:', dbError.message);
       return res.status(503).json({
         message: 'Database is unavailable. Check the server-side DATABASE_URL configuration.',
-        error: dbError.code
+        error: dbError.message || dbError.code
       });
     }
   }
