@@ -73,8 +73,6 @@ exports.deleteTeacher = async (req, res) => {
         // Remove materials
         await db.query('DELETE FROM study_materials WHERE teacher_id = ?', [teacherId]);
         
-        // Remove feedback
-        await db.query('DELETE FROM feedback WHERE teacher_id = ?', [teacherId]);
         await db.query('DELETE FROM student_feedback WHERE teacher_id = ?', [teacherId]);
         
         // Remove assignment submissions first, then assignments

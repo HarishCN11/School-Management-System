@@ -64,7 +64,7 @@ exports.createAssignment = async (req, res) => {
         const teacher_id = teacher[0].id;
 
         const [result] = await db.query(
-            'INSERT INTO assignments (title, description, class_id, subject_id, teacher_id, due_date, file_path) VALUES (?, ?, ?, ?, ?, ?, ?)',
+            'INSERT INTO assignments (title, description, class_id, subject_id, teacher_id, due_date, file_path) VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING id',
             [title, description, class_id, subject_id, teacher_id, due_date, filePath]
         );
         res.status(201).json({ id: result.insertId, message: 'Assignment created successfully' });

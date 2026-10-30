@@ -15,7 +15,7 @@ exports.createClass = async (req, res) => {
     const { name, room_number, capacity } = req.body;
     try {
         const cap = parseInt(capacity) || 100;
-        const [result] = await db.query('INSERT INTO classes (name, room_number, capacity) VALUES (?, ?, ?)', [name, room_number, cap]);
+        const [result] = await db.query('INSERT INTO classes (name, room_number, capacity) VALUES (?, ?, ?) RETURNING id', [name, room_number, cap]);
         res.status(201).json({ message: 'Class created', id: result.insertId });
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -177,7 +177,7 @@ exports.getStudentStats = async (req, res) => {
         if (!student) return res.status(404).json({ message: 'Student not found' });
 
         const [[courseCount]] = await db.query('SELECT COUNT(DISTINCT s.name) as count FROM schedule sch JOIN subjects s ON sch.subject_id = s.id WHERE sch.class_id = ?', [student.class_id]);
-        const [[examCount]] = await db.query('SELECT COUNT(*) as count FROM exams WHERE class_id = ? AND exam_date >= CURDATE()', [student.class_id]);
+        const [[examCount]] = await db.query('SELECT COUNT(*) as count FROM exams WHERE class_id = ? AND exam_date >= CURRENT_DATE', [student.class_id]);
         const [[assignmentCount]] = await db.query('SELECT COUNT(*) as count FROM assignments WHERE class_id = ?', [student.class_id]);
         
         const [[attendanceData]] = await db.query(`
@@ -202,4 +202,3 @@ exports.getStudentStats = async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 };
-

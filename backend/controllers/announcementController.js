@@ -34,7 +34,7 @@ exports.createAnnouncement = async (req, res) => {
 
     try {
         const [result] = await pool.query(
-            'INSERT INTO announcements (title, content, target_role, class_id, posted_by, display_until, file_path) VALUES (?, ?, ?, ?, ?, ?, ?)',
+            'INSERT INTO announcements (title, content, target_role, class_id, posted_by, display_until, file_path) VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING id',
             [title, content, target_role || 'all', class_id || null, posted_by, display_until || null, file_path]
         );
         res.status(201).json({ id: result.insertId, message: 'Announcement created', file_path });

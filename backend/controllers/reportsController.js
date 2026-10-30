@@ -303,10 +303,10 @@ exports.updateOfficialMarks = async (req, res) => {
             await db.query(`
                 INSERT INTO official_reports (student_id, subject_id, academic_year, term_1_marks, term_2_marks, term_3_marks)
                 VALUES (?, ?, ?, ?, ?, ?)
-                ON DUPLICATE KEY UPDATE 
-                term_1_marks = VALUES(term_1_marks),
-                term_2_marks = VALUES(term_2_marks),
-                term_3_marks = VALUES(term_3_marks)
+                ON CONFLICT (student_id, subject_id, academic_year) DO UPDATE SET
+                term_1_marks = EXCLUDED.term_1_marks,
+                term_2_marks = EXCLUDED.term_2_marks,
+                term_3_marks = EXCLUDED.term_3_marks
             `, [student_id, m.subject_id, targetYear, m.term_1_marks || '-', m.term_2_marks || '-', m.term_3_marks || '-']);
         }
         res.json({ message: 'Official report marks updated successfully' });
