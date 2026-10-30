@@ -30,8 +30,8 @@ exports.recordResults = async (req, res) => {
 
         for (const result of results_data) {
             await connection.query(
-                'INSERT INTO results (exam_id, student_id, marks_obtained) VALUES (?, ?, ?) ON DUPLICATE KEY UPDATE marks_obtained = ?',
-                [exam_id, result.student_id, result.marks_obtained, result.marks_obtained]
+                'INSERT INTO results (exam_id, student_id, marks_obtained) VALUES (?, ?, ?)',
+                [exam_id, result.student_id, result.marks_obtained]
             );
         }
 
@@ -51,7 +51,7 @@ exports.getStudentResults = async (req, res) => {
     const { student_id } = req.params;
     try {
         const query = `
-      SELECT r.marks_obtained, e.name as exam_name, e.term, e.total_marks, e.exam_date, s.name as subject_name
+      SELECT r.marks_obtained, e.name as exam_name, e.total_marks, e.exam_date, s.name as subject_name
       FROM results r
       JOIN exams e ON r.exam_id = e.id
       JOIN subjects s ON e.subject_id = s.id

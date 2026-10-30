@@ -2,10 +2,11 @@ const express = require('express');
 const router = express.Router();
 const authController = require('../controllers/authController');
 const verifyToken = require('../middleware/authMiddleware');
+const authorizeRoles = require('../middleware/authorizeRoles');
 const createUploadMiddleware = require('../middleware/uploadMiddleware');
 const uploadProfilePhoto = createUploadMiddleware('profile_photo', 'profiles');
 
-router.post('/register', authController.register);
+router.post('/register', verifyToken, authorizeRoles('admin'), authController.register);
 router.post('/login', authController.login);
 
 // Password Reset
@@ -16,6 +17,6 @@ router.post('/reset-password', authController.resetPasswordWithTemp);
 router.get('/profile', verifyToken, authController.getProfile);
 router.put('/profile', verifyToken, uploadProfilePhoto, authController.updateProfile);
 router.post('/admin-reset-password', verifyToken, authController.adminResetUserPassword);
-router.delete('/:id', verifyToken, authController.deleteUser);
+router.delete('/:id', verifyToken, authorizeRoles('admin'), authController.deleteUser);
 
 module.exports = router;

@@ -14,8 +14,8 @@ exports.markAttendance = async (req, res) => {
 
         for (const record of attendance_data) {
             await connection.query(
-                'INSERT INTO attendance (student_id, class_id, date, status) VALUES (?, ?, ?, ?) ON DUPLICATE KEY UPDATE status = ?',
-                [record.student_id, class_id, date, record.status, record.status]
+                'INSERT INTO attendance (student_id, class_id, date, status) VALUES (?, ?, ?, ?)',
+                [record.student_id, class_id, date, record.status]
             );
         }
 

@@ -26,7 +26,10 @@ exports.getClassSchedule = async (req, res) => {
       JOIN teachers t ON s.teacher_id = t.id
       JOIN users u ON t.user_id = u.id
       WHERE s.class_id = ?
-      ORDER BY FIELD(s.day_of_week, 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'), s.start_time
+      ORDER BY CASE s.day_of_week
+        WHEN 'Monday' THEN 1 WHEN 'Tuesday' THEN 2 WHEN 'Wednesday' THEN 3
+        WHEN 'Thursday' THEN 4 WHEN 'Friday' THEN 5 WHEN 'Saturday' THEN 6
+        ELSE 7 END, s.start_time
     `;
         const [schedule] = await db.query(query, [class_id]);
         res.json(schedule);
@@ -46,7 +49,10 @@ exports.getTeacherSchedule = async (req, res) => {
       JOIN subjects sub ON s.subject_id = sub.id
       JOIN classes c ON s.class_id = c.id
       WHERE s.teacher_id = ?
-      ORDER BY FIELD(s.day_of_week, 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'), s.start_time
+      ORDER BY CASE s.day_of_week
+        WHEN 'Monday' THEN 1 WHEN 'Tuesday' THEN 2 WHEN 'Wednesday' THEN 3
+        WHEN 'Thursday' THEN 4 WHEN 'Friday' THEN 5 WHEN 'Saturday' THEN 6
+        ELSE 7 END, s.start_time
     `;
         const [schedule] = await db.query(query, [teacher_id]);
         res.json(schedule);

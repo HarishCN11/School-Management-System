@@ -17,7 +17,6 @@ build/
 .env.*.local
 .env.production
 .env.development
-backend/config/db.js
 backend/config/db.*.js
 
 # IDE

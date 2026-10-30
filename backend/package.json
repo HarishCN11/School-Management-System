@@ -7,7 +7,7 @@
     "dev": "node --watch index.js",
     "seed": "node config/seed.js",
     "db:check": "node config/check_connection.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node --test tests/postgresDb.test.js"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +21,7 @@
     "jsonwebtoken": "^9.0.3",
     "multer": "^2.0.2",
     "mysql2": "^3.16.1",
-    "nodemailer": "^10.2.1"
+    "nodemailer": "^10.2.1",
+    "pg": "^8.23.1"
   }
 }

@@ -15,11 +15,10 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Request Logger & DB Connectivity Check
+// Request logger and database connectivity check
 app.use(async (req, res, next) => {
   console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
 
-  // Quick health check for API routes
   if (req.url.startsWith('/api')) {
     try {
       const connection = await db.getConnection();
@@ -27,7 +26,7 @@ app.use(async (req, res, next) => {
     } catch (dbError) {
       console.error('CRITICAL: Database connection failed during request:', dbError.message);
       return res.status(503).json({
-        message: 'Database is offline. Please start your MySQL service (XAMPP or Windows Services).',
+        message: 'Database is unavailable. Check the server-side DATABASE_URL configuration.',
         error: dbError.code
       });
     }
@@ -78,7 +77,8 @@ const healthCheck = async (req, res) => {
     await connection.release();
     res.json({ status: 'healthy', database: 'connected' });
   } catch (error) {
-    res.status(500).json({ status: 'unhealthy', database: 'disconnected', error: error.message });
+    console.error('Database health check failed:', error);
+    res.status(500).json({ status: 'unhealthy', database: 'disconnected' });
   }
 };
 
@@ -102,8 +102,7 @@ if (require.main === module) {
       })
       .catch(error => {
         console.warn('⚠ Database connection failed:', error.message);
-        console.warn('Server is running but database features may not work.');
-        console.warn('Make sure MySQL is running and credentials in .env are correct.');
+        console.warn('Set DATABASE_URL to a Supabase PostgreSQL connection string.');
       });
   });
 }

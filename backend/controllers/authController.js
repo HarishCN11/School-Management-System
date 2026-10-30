@@ -57,7 +57,7 @@ exports.register = async (req, res) => {
         const passwordHash = await bcrypt.hash(password, salt);
 
         const [result] = await db.query(
-            'INSERT INTO users (name, email, password_hash, role) VALUES (?, ?, ?, ?)',
+            'INSERT INTO users (name, email, password_hash, role) VALUES (?, ?, ?, ?) RETURNING id',
             [name, email, passwordHash, role || 'student']
         );
 
@@ -235,7 +235,7 @@ exports.getProfile = async (req, res) => {
     const role = req.user.role.toLowerCase();
 
     try {
-        let sql = 'SELECT id, name, email, role, profile_photo FROM users WHERE id = ?';
+        let sql = 'SELECT id, name, email, role FROM users WHERE id = ?';
         const [users] = await db.query(sql, [userId]);
         if (users.length === 0) return res.status(404).json({ message: 'User not found' });
 
@@ -261,7 +261,7 @@ exports.getProfile = async (req, res) => {
             const [data] = await db.query('SELECT experience_years, contact_number as phone_number FROM principals WHERE user_id = ?', [userId]);
             if (data.length > 0) roleData = data[0];
         } else if (role === 'parent') {
-            const [data] = await db.query('SELECT phone_number, address FROM parents WHERE user_id = ?', [userId]);
+            const [data] = await db.query('SELECT phone_number FROM parents WHERE user_id = ?', [userId]);
             if (data.length > 0) roleData = data[0];
         }
 

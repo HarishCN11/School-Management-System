@@ -24,7 +24,7 @@ exports.createInventory = async (req, res) => {
     const autoStatus = getStatusFromQuantity(quantity);
     try {
         const [result] = await pool.query(
-            'INSERT INTO inventory (item_name, category, quantity, status, description) VALUES (?, ?, ?, ?, ?)',
+            'INSERT INTO inventory (item_name, category, quantity, status, description) VALUES (?, ?, ?, ?, ?) RETURNING id',
             [item_name, category, quantity, autoStatus, description]
         );
         res.status(201).json({ id: result.insertId, message: 'Item created' });
@@ -41,7 +41,7 @@ exports.updateInventory = async (req, res) => {
     const autoStatus = getStatusFromQuantity(quantity);
     try {
         await pool.query(
-            'UPDATE inventory SET item_name = ?, category = ?, quantity = ?, status = ?, description = ? WHERE id = ?',
+            'UPDATE inventory SET item_name = ?, category = ?, quantity = ?, status = ?, description = ?, last_updated = CURRENT_TIMESTAMP WHERE id = ?',
             [item_name, category, quantity, autoStatus, description, id]
         );
         res.json({ message: 'Item updated' });
